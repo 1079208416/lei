@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: shike_delivery
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-shike_root_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - shike-mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build:
+      context: ../backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      DB_URL: jdbc:mysql://mysql:3306/shike_delivery?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-shike_root_password}
+      JWT_SECRET: ${JWT_SECRET:-replace-this-secret-before-production}
+      DEMO_MODE: "true"
+      PAYMENT_MODE: mock
+      CORS_ORIGINS: http://localhost:5173
+    ports:
+      - "18080:8080"
+
+  frontend:
+    build:
+      context: ../frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  shike-mysql:

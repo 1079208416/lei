@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Shike Frontend" type="js.build_tools.npm" factoryName="npm">
+    <package-json value="$PROJECT_DIR$/frontend/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs>
+      <env name="VITE_API_PROXY_TARGET" value="http://localhost:18080" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

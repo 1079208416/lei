@@ -1,0 +1,23 @@
+# Java
+backend/target/
+backend/data/
+backend/*.log
+data/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/work/
+
+# Local tooling and scratch files
+work/
+.idea/*
+!.idea/runConfigurations/
+!.idea/runConfigurations/**
+.vscode/
+*.iml
+
+# Environment
+.env
+.env.local
+deploy/.env

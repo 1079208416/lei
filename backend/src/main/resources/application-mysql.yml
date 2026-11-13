@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/shike_delivery?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+  h2:
+    console:
+      enabled: false
+
+app:
+  demo-mode: ${DEMO_MODE:false}
+  payment-mode: ${PAYMENT_MODE:wechat}

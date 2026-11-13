@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: shike-delivery
+  datasource:
+    url: jdbc:h2:file:./data/shike;MODE=MySQL;DATABASE_TO_LOWER=TRUE;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:shike-mvp-development-secret-key-change-in-production-2026}
+    expiration-hours: 24
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  demo-mode: ${DEMO_MODE:true}
+  payment-mode: ${PAYMENT_MODE:mock}
+
+logging:
+  level:
+    com.shike.delivery: info

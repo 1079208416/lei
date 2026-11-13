@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:shike_test;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: true
+
+app:
+  jwt:
+    secret: shike-test-secret-key-for-mockmvc-flow-only-2026
+    expiration-hours: 2
+  cors:
+    allowed-origins: http://localhost:5173
+  demo-mode: true
+  payment-mode: mock
